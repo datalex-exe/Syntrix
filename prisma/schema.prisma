@@ -1,0 +1,91 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String?   // Used for local mock credential authentication
+  createdAt DateTime  @default(now())
+  projects  Project[]
+}
+
+model Project {
+  id           String       @id @default(uuid())
+  userId       String
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain       String
+  name         String
+  gscConnected Boolean      @default(false)
+  webhookUrl   String?
+  briefing     String?      // Optional full site briefing/description for AI analysis
+  createdAt    DateTime     @default(now())
+  keywords     Keyword[]
+  competitors  Competitor[]
+  auditIssues  AuditIssue[]
+  reports      Report[]
+
+  @@index([userId])
+}
+
+model Keyword {
+  id            String        @id @default(uuid())
+  projectId     String
+  project       Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  phrase        String
+  targetCountry String        @default("US")
+  createdAt     DateTime      @default(now())
+  rankHistory   RankHistory[]
+
+  @@unique([projectId, phrase, targetCountry])
+  @@index([projectId])
+}
+
+model RankHistory {
+  id         String   @id @default(uuid())
+  keywordId  String
+  keyword    Keyword  @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+  position   Int      // SERP position, e.g. 1-100. 101+ if not found.
+  checkedAt  DateTime @default(now())
+
+  @@index([keywordId, checkedAt])
+}
+
+model Competitor {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  domain    String
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, domain])
+  @@index([projectId])
+}
+
+model AuditIssue {
+  id         String   @id @default(uuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url        String
+  issueType  String   // e.g. "broken-link", "missing-title", "slow-page"
+  severity   String   // "critical" | "warning" | "info"
+  details    String   // Description or error details
+  detectedAt DateTime @default(now())
+
+  @@index([projectId])
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  generatedAt DateTime @default(now())
+  fileUrl     String
+  reportType  String   // "PDF" | "CSV"
+
+  @@index([projectId])
+}

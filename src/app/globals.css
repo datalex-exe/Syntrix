@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #090d16;
+  --foreground: #f9fafb;
+  --card: #111827;
+  --card-foreground: #f9fafb;
+  --popover: #090d16;
+  --popover-foreground: #f9fafb;
+  --primary: #6366f1; /* UI UX Pro Max Electric Indigo */
+  --primary-foreground: #ffffff;
+  --secondary: #1f2937;
+  --secondary-foreground: #f9fafb;
+  --muted: #1f2937;
+  --muted-foreground: #9ca3af;
+  --accent: #3b82f6; /* UI UX Pro Max Neon Blue */
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(31, 41, 55, 0.7);
+  --ring: #6366f1;
+  --radius: 1rem;
+
+  --chart-1: #6366f1;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #3b82f6;
+  --chart-5: #ec4899;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  
+  --font-sans: 'Plus Jakarta Sans', var(--font-geist-sans), sans-serif;
+  --font-mono: 'Fira Code', var(--font-geist-mono), monospace;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 90% 90%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+/* Micro-Animations & Bento Tokens */
+.transition-all-300 {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.15);
+}
+
+.glass-panel {
+  background: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-input {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-input:focus {
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  outline: none;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #6ee7b7 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bento-badge {
+  display: inline-flex;
+  items-center: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+}
+
+/* Recharts Custom Styling */
+.recharts-default-tooltip {
+  background-color: rgba(17, 24, 39, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Hide Next.js Dev Indicator & Route Info Overlay */
+nextjs-portal, [data-nextjs-toast], [data-nextjs-dialog-overlay] {
+  display: none !important;
+}
